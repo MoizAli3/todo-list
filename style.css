@@ -15,11 +15,31 @@
 }
 
 .col {
-  height: 68vh;
+  height: 70vh;
   width: 440px;
   background-color: rgb(255, 255, 255);
   box-shadow: 0px 0px 48px -13px #39b3ec;
   border-radius: 20px;
+}
+
+ul {
+  padding: 0 40px;
+  overflow-y: auto;
+  height: 43vh;
+}
+
+ul::-webkit-scrollbar {
+  width: 10px;
+}
+
+ul::-webkit-scrollbar-track {
+  background-color: #e4e4e4;
+  border-radius: 100px;
+}
+
+ul::-webkit-scrollbar-thumb {
+  background-color: #39b3ec;
+  border-radius: 100px;
 }
 
 .header .input-container {
@@ -29,7 +49,7 @@
 }
 
 .header .input-container input {
-  width: 300px;
+  width: 250px;
   border: none;
   padding: 10px 20px;
   border-radius: 21px;
@@ -66,7 +86,7 @@ ul li span i {
 
 ul li span input {
   height: 30px;
-  width: 270px;
+  width: 250px;
   font-size: 17px;
   border: none;
   cursor: pointer;
@@ -83,10 +103,6 @@ ul li span input:focus,
 
 .fa-trash-can:hover {
   color: #b30000;
-}
-
-ul {
-  padding: 0 40px;
 }
 
 @media only screen and (max-width: 478px) {
@@ -111,6 +127,6 @@ ul {
   }
 
   ul li span input {
-    width: 196px;
+    width: 176px;
   }
 }
