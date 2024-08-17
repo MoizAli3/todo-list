@@ -22,16 +22,28 @@
   border-radius: 20px;
 }
 
-.col h2 {
-  padding: 30px 40px;
-  background-image: linear-gradient(to left, #4cc5fc, #2feffc);
-  text-align: center;
+.header .input-container {
   display: flex;
   justify-content: space-between;
-  color: white;
+  margin-top: 20px;
 }
 
-.col h2 i {
+.header .input-container input {
+  width: 300px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 21px;
+  font-size: 17px;
+}
+
+.col .header {
+  padding: 30px 25px 25px;
+  background-image: linear-gradient(to left, #4cc5fc, #2feffc);
+  color: white;
+  border-radius: 20px 20px 0 0;
+}
+
+.col .fa-circle-plus {
   color: white;
   font-size: 50px;
 }
@@ -55,15 +67,50 @@ ul li span i {
 ul li span input {
   height: 30px;
   width: 270px;
-  font-size: 20px;
+  font-size: 17px;
   border: none;
   cursor: pointer;
 }
 
-ul li span input:focus {
+ul li span input:focus,
+.header .input-container input:focus {
   outline-style: none;
+}
+
+.fa-pencil:hover {
+  color: #03e137;
+}
+
+.fa-trash-can:hover {
+  color: #b30000;
 }
 
 ul {
   padding: 0 40px;
+}
+
+@media only screen and (max-width: 478px) {
+  .col {
+    width: 304px;
+  }
+
+  .col .header {
+    padding: 25px 12px;
+  }
+
+  .col .fa-circle-plus {
+    font-size: 41px;
+  }
+
+  .header .input-container input {
+    width: 218px;
+  }
+
+  ul {
+    padding: 0 13px;
+  }
+
+  ul li span input {
+    width: 196px;
+  }
 }

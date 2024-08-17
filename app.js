@@ -1,52 +1,92 @@
-plusIcon = document.querySelector(`h2 i`);
-editIcon = document.querySelectorAll(`span .fa-pencil`);
-deleteIcon = document.querySelectorAll(`span .fa-trash-can`);
-inputField = document.querySelectorAll("input");
-list = document.querySelectorAll(`ul li`);
+// Initial Element Selection
+const plusIcon = document.querySelector(`.input-container i`);
+const taskField = document.querySelector(`.input-container input`);
+const list = document.querySelector(`ul`);
+const h2 = document.querySelector(`h2`);
 
-inputField.forEach((Element) => {
-  Element.addEventListener("dblclick", (e) => {
-    let attValue = (e.target.readOnly = false);
-    if (!attValue) {
-      e.target.style.cursor = `text`;
-    }
+// Setting the Date
+const d = new Date();
+const days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const dayName = days[d.getDay()];
+const date = d.getDate();
+const monthName = months[d.getMonth()];
+h2.innerText = `${dayName}, ${date} ${monthName}`;
 
-    console.log(`i am double click : ${e.target}`);
-  });
+// Function to add a new task to the list
+const addListFunction = () => {
+  const taskValue = taskField.value.trim();
+  if (taskValue) {
+    const listItemHTML = `
+      <li>
+        <span><input type="text" value="${taskValue}" readonly></span>
+        <span><i class="fa-solid fa-pencil"></i><i class="fa-solid fa-trash-can"></i></span>
+      </li>`;
+    list.insertAdjacentHTML("beforeend", listItemHTML);
+    taskField.value = ""; // Clear the input field
+  } else {
+    alert("Enter your task");
+  }
+};
 
-  Element.addEventListener("blur", (e) => {
-    let attValue = (e.target.readOnly = true);
-    if (attValue) {
-      e.target.style.cursor = `pointer`;
-    }
-  });
-
-  Element.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      e.target.readOnly = true;
-      e.target.style.cursor = `pointer`;
-    }
-  });
+// Event delegation to handle clicks on edit and delete icons
+list.addEventListener("click", (e) => {
+  if (e.target.classList.contains("fa-trash-can")) {
+    e.target.closest("li").remove();
+  } else if (e.target.classList.contains("fa-pencil")) {
+    const input = e.target.closest("li").querySelector("input");
+    input.removeAttribute("readonly");
+    input.focus();
+    e.target.closest("li").style.borderColor = "#03e137";
+  }
 });
 
-editIcon.forEach((element) => {
-  element.addEventListener("click", (e) => {
-    let targetElement =
-      e.target.parentElement.previousElementSibling.querySelector("input");
-    if (targetElement) {
-      targetElement.removeAttribute("readonly");
+// Event delegation for input double-click, blur, and enter key events
+list.addEventListener("dblclick", (e) => {
+  if (e.target.tagName === "INPUT") {
+    e.target.removeAttribute("readonly");
+    e.target.style.cursor = "text";
+    e.target.closest("li").style.borderColor = "#03e137";
+  }
+});
+
+list.addEventListener(
+  "blur",
+  (e) => {
+    if (e.target.tagName === "INPUT") {
+      e.target.setAttribute("readonly", true);
+      e.target.style.cursor = "pointer";
+      e.target.closest("li").style.borderColor = "gray";
     }
-  });
-});
+  },
+  true
+);
 
-deleteIcon.forEach((Element) => {
-  Element.addEventListener("click", (e) => {
-    console.log(e);
-    let targetElement = e.target.parentElement.parentElement;
-    console.log(targetElement.remove());
-  });
-});
+plusIcon.addEventListener("click", addListFunction);
 
-plusIcon.addEventListener("click", () => {
-  console.log("Plus Icon");
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    addListFunction();
+  }
 });
